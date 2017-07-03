@@ -36,8 +36,7 @@ CREATE TABLE final_image (
 );
 
 
-insert into artist (username, email, facebookId, token, name) values ('dummyperson', 'dummyemail@test.com', 'dummyuser', 'NA', 'dummyperson');
-insert into final_image (head_id, torso_id, legs_id, user_id) values (1, 1, 1, 0);
+insert into artist (username, email, facebookId, token, name) values ('Harry Prissypizzle', 'dummyemail@test.com', 'dummyuser', 'NA', 'Harry Prissypizzle');
 insert into torso (_path, user_id )  values ( 'images?path=71b9ab679e89a4360fe9c0bbae972bedc2330255442a2f174cad63914111d327.png', 1 );
 insert into torso (_path, user_id ) values ( 'images?path=0ebab7ebf82861ec8e0253ac25c3a67382dc94c767ffe9bd99b0af58e36ee775.png', 1 );
 insert into head (_path, user_id ) values ( 'images?path=0fc212ccfb9429f2c833c292a5edf8d6cf5c4e7c5ab945f9f1ad620960b14672.png', 1);
@@ -62,6 +61,7 @@ insert into torso (_path, user_id ) values ('images?path=964d479cc223ea25653a2ed
 insert into legs (_path, user_id ) values ('images?path=a69f0cc5881b3f0eb200d0b2fab861c105ba048c60efc120f1be14b9a8d6eff4.png', 1);
 insert into legs (_path, user_id ) values ('images?path=d70ca14d9f0898c116ecb67b28f628728a90547f32e2fe05d1c0a794a5f9b99e.png', 1);
 insert into head (_path, user_id ) values ('images?path=d08f122e05a5c4414c8ad03e4b9dd230e8b49266319bc17fbf3dd7128fc4cad1.png', 1);
-insert into legs (_path, user_id ) values ('images?path=dc52c924f93054a34ac0ea3d1aa82c2dfb0a996814c7485fffcbafe651290bd2.png', 1);
+insert into head (_path, user_id ) values ('images?path=dc52c924f93054a34ac0ea3d1aa82c2dfb0a996814c7485fffcbafe651290bd2.png', 1);
 insert into head (_path, user_id ) values ('images?path=f6d525f9638acb5e8a1ba51e8fe421edb01014acfcb50c443a28c91b1bd092e4.png', 1);
-insert into head (_path, user_id )  values ( 'images?path=84190090ed8a0bb403da1f7a9359e68361c8ea5784cacff5aacff4b0752bc1d2.png', 1 );
+insert into head (_path, user_id ) values ( 'images?path=84190090ed8a0bb403da1f7a9359e68361c8ea5784cacff5aacff4b0752bc1d2.png', 1 );
+insert into final_image (head_id, torso_id, legs_id, user_id) values (1, 2, 1, 1);

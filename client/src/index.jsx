@@ -29,10 +29,6 @@ class App extends React.Component {
     this.saveComposite = this.saveComposite.bind(this);
   }
 
-  componentDidMount() {
-    // this.setState({currentView: <Composite pic={this.state.pics[0]} />});
-  }
-
   componentSwitch(e) {
     e.preventDefault();
     var targetVal = e.target.innerText;
