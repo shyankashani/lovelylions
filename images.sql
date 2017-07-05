@@ -11,19 +11,19 @@ CREATE TABLE artist(
 
 CREATE TABLE head (
     id      SERIAL PRIMARY KEY,
-    _path    VARCHAR(255) NOT NULL,
+    _path    TEXT NOT NULL,
     user_id  INTEGER references artist(id)
 );
 
 CREATE TABLE torso (
     id      SERIAL PRIMARY KEY,
-    _path    VARCHAR(255) NOT NULL,
+    _path    TEXT NOT NULL,
     user_id  INTEGER references artist(id)
 );
 
 CREATE TABLE legs (
     id      SERIAL PRIMARY KEY,
-    _path    VARCHAR(255) NOT NULL,
+    _path    TEXT NOT NULL,
     user_id  INTEGER references artist(id)
 );
 

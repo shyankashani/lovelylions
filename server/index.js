@@ -76,17 +76,19 @@ app.get('/generate', (req, res) => {
 });
 
 app.post('/save', (req, res) => {
-  var base64Data = req.body[req.query.part].path.split(',')[1];
-  var fileName = generateFilename(base64Data);
+  var base64Data = req.body[req.query.part].path
+  // .split(',')[1];
+  // var fileName = generateFilename(base64Data);
   var username = req.body.head.artist;
-  fs.writeFile(`./server/images/${fileName}.png`, base64Data, 'base64', (err) => {
-    if (err) console.log(err);
-    req.body[req.query.part].path = `./images/${fileName}.png`;
-    let thePath = `images?path=${fileName}.png`;
-    db.saveImageToFinalImage(req.body, req.query.part, thePath, (data) => {
-      res.end();
-    });
+  req.body[req.query.part].path = base64Data;
+  // fs.writeFile(`./server/images/${fileName}.png`, base64Data, 'base64', (err) => {
+  //   if (err) console.log(err);
+  //   req.body[req.query.part].path = `./images/${fileName}.png`;
+  //   let thePath = `images?path=${fileName}.png`;
+  db.saveImageToFinalImage(req.body, req.query.part, base64Data, (data) => {
+    res.end();
   });
+  // });
 });
 
 app.get('/images', (req, res) => {
