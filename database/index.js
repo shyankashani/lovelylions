@@ -4,18 +4,28 @@ const options = {
     promiseLib: Promise
 };
 const pgp = require('pg-promise')(options);
+
 const cn = {
+<<<<<<< HEAD
     host: 'localhost',
     port: 5432,
     database: 'exquiste',
     user: 'shyankashani',
     password: ''
+=======
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 5432,
+    database: process.env.DB_NAME || 'exquiste',
+    user: process.env.DB_USERNAME || 'shyankashani',
+    password: process.env.DB_PASSWORD || ''
+>>>>>>> upstream/master
 };
 
 if (process.env.DATABASE_URL) {
   console.log('connected to heroku postgres db');
   pgp.pg.defaults.ssl = true;
 };
+
 const db = pgp(process.env.DATABASE_URL || cn);
 
 let query = function(queryStr, callback){
