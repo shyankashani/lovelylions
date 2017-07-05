@@ -41,6 +41,7 @@ class Composite extends React.Component {
         </canvas>
         <div className="button-cluster">
           <button onClick={this.regenerate.bind(this)}>regenerate</button>
+          <button onClick{()=>{} }
           {this.props.login ? <button onClick={this.saveImage.bind(this)}>save</button> : ''}
         </div>
       </div>
