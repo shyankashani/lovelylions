@@ -1,6 +1,7 @@
 var express = require('express');
 var db = require('../database/index.js');
 var bodyParser = require('body-parser');
+const difference = require('underscore').difference;
 
 var fs = require('fs');
 var crypto = require('crypto');
@@ -70,7 +71,8 @@ app.get('/gallery', (req, res) => {
 
 app.get('/generate', (req, res) => {
   var userPart = req.query.part;
-  db.getTwoImages(userPart, (data) => {
+  var diff = difference(['head', 'torso', 'legs'], [userPart])
+  db.getImages(diff, (data) => {
     res.send(JSON.stringify(data));
   });
 });

@@ -119,7 +119,7 @@ class App extends React.Component {
                 </a>
               </span>
             ) : (
-              <a href="/auth/facebook" >login</a>
+              <a href="/auth/facebook">login</a>
             )}
           </div>
           {this.state.currentView}
