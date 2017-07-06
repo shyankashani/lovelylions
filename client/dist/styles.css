@@ -2,7 +2,7 @@ body {
   margin: 0px;
   font-family: 'Work Sans', sans-serif;
   background-color: #fffdf9;
-
+  overflow: hidden;
 }
 
 .foreground {

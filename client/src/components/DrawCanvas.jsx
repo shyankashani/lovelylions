@@ -16,23 +16,6 @@ class DrawCanvas extends React.Component {
     this.isDrawing = false;
     this.scrollLeft = 0;
     this.scrollTop = 0;
-
-        // Prevent scrolling when touching the canvas
-    document.body.addEventListener("onTouchStart", function (e) {
-      if (e.target == canvas) {
-        e.preventDefault();
-      }
-    }, false);
-    document.body.addEventListener("onTouchEnd", function (e) {
-      if (e.target == canvas) {
-        e.preventDefault();
-      }
-    }, false);
-    document.body.addEventListener("onTouchMove", function (e) {
-      if (e.target == canvas) {
-        e.preventDefault();
-      }
-    }, false);
   }
 
   onEraserClick() {
@@ -84,7 +67,7 @@ class DrawCanvas extends React.Component {
   }
 
   touchDrawing(event) {
-    console.log(event.touches);
+    //console.log(event.touches);
     var left = event.touches[0].clientX - this.offsetLeft + this.scrollLeft;
     var top = event.touches[0].clientY - this.offsetTop + this.scrollTop;
     if (this.isDrawing) {
@@ -158,10 +141,11 @@ class DrawCanvas extends React.Component {
       this.offsetLeft = this.canvas.offsetLeft;
       this.offsetTop = this.canvas.offsetTop;
     }).bind(this);
-    document.addEventListener('scroll', (event) => {
-      this.scrollLeft = document.body.scrollLeft;
-      this.scrollTop = document.body.scrollTop;
-    });
+    // document.addEventListener('scroll', (event) => {
+    //   this.scrollLeft = document.body.scrollLeft;
+    //   this.scrollTop = document.body.scrollTop;
+    // });
+   
   }
 
   render () {
