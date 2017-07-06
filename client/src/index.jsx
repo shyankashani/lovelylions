@@ -23,7 +23,9 @@ class App extends React.Component {
       login: name ? name : null,
       currentView: <DrawCanvas generateImage={this.generateImage.bind(this)}/>,
       pics: [],
-      fixedParts: []
+      headIsFixed: false,
+      torsoIsFixed: false,
+      legsIsFixed: false
     };
     this.componentSwitch = this.componentSwitch.bind(this);
     this.generateImage = this.generateImage.bind(this);
@@ -58,7 +60,9 @@ class App extends React.Component {
               generateImage={this.generateImage}
               saveImage={this.saveComposite}
               login={this.state.login}
-              fixParts={this.fixParts.bind(this)}
+              fixHead={this.fixHead.bind(this)}
+              fixTorso={this.fixTorso.bind(this)}
+              fixLegs={this.fixLegs.bind(this)}
               fixedParts={this.state.fixedParts}
             />
         }, () => { console.log('user part', userPart); console.log('pic', generatedImage) });
@@ -74,8 +78,28 @@ class App extends React.Component {
     }).then(() => this.fetchGallery())
   }
 
-  fixParts(...args) {
-    this.setState({ fixedParts: [...args] });
+  fixHead() {
+    if (this.state.headIsFixed) {
+      this.setState({ headIsFixed: false }, console.log(this.state.headIsFixed))
+    } else {
+      this.setState({ headIsFixed: true }, console.log(this.state.headIsFixed))
+    }
+  }
+
+  fixTorso() {
+    if (this.state.torsoIsFixed) {
+      this.setState({ torsoIsFixed: false }, console.log(this.state.torsoIsFixed))
+    } else {
+      this.setState({ torsoIsFixed: true }, console.log(this.state.torsoIsFixed))
+    }
+  }
+
+  fixLegs() {
+    if (this.state.legsIsFixed) {
+      this.setState({ legsIsFixed: false }, console.log(this.state.legsIsFixed))
+    } else {
+      this.setState({ legsIsFixed: true }, console.log(this.state.legsIsFixed))
+    }
   }
 
   render() {
