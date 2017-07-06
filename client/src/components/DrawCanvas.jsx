@@ -139,7 +139,7 @@ class DrawCanvas extends React.Component {
     this.context.shadowBlur = 5;
     this.offsetLeft = this.canvas.offsetLeft;
     this.offsetTop = this.canvas.offsetTop;
-    window.onresize = (event => {
+    window.onresize = (event => {g
       this.offsetLeft = this.canvas.offsetLeft;
       this.offsetTop = this.canvas.offsetTop;
     }).bind(this);
@@ -169,9 +169,9 @@ class DrawCanvas extends React.Component {
           <img className="overlay outline" src={this.state.bodyPart + '.png'} />
         </div>
         <div className="button-cluster">
-          <img style={{'backgroundColor': this.state.eColor}} onClick={this.onEraserClick.bind(this)} className="eraser" src="erasericon.png"></img>
-          <img style={{'backgroundColor': this.state.dColor}} onClick={this.onDrawClick.bind(this)} className="drawBrush" src="brushicon.png"></img>
-          <input className="clearBtn" onClick={this.clearCanvas.bind(this)} type='button' value="Clear"></input>
+          <img style={{'backgroundColor': this.state.eColor, 'marginRight': '20px'}} onClick={this.onEraserClick.bind(this)} className="eraser" src="erasericon.png"></img>
+          <img style={{'backgroundColor': this.state.dColor, 'marginRight': '20px'}} onClick={this.onDrawClick.bind(this)} className="drawBrush" src="brushicon.png"></img>
+          <input style={{'marginRight': '20px'}} className="clearBtn" onClick={this.clearCanvas.bind(this)} type='button' value="Clear"></input>
           <span>Brush size: {this.state.brushWidth}</span>
           <input onChange={this.updateBrushWidth.bind(this)}
           value={this.state.brushWidth}

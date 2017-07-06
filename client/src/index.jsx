@@ -99,9 +99,8 @@ class App extends React.Component {
           <MediaQuery orientation='landscape'>
             <ExquisiteWriter />
             <div className="foreground">
-            
-            {this.state.currentView}
-          </div>
+              {this.state.currentView}
+            </div>
           </MediaQuery>
         </MediaQuery>
       </div>
