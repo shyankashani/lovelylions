@@ -28,7 +28,6 @@ class Composite extends React.Component {
     if (this.props.fixedHead) { fixedParts.push('head') }
     if (this.props.fixedTorso) { fixedParts.push('torso') }
     if (this.props.fixedLegs) { fixedParts.push('legs') }
-    console.log('fixedParts', fixedParts);
     var pathValue = this.props.pic[this.props.userPart];
     var userImage = {}
     userImage[this.props.userPart] = pathValue;

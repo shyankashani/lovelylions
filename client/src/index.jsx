@@ -115,12 +115,6 @@ class App extends React.Component {
     }).then(() => this.fetchGallery())
   }
 
-  deletePartImage(part, id) {
-    console.log('part, id', part, id);
-    fetch(`/delete?part=${part}&id=${id}`)
-    .then(() => { console.log('successfully deleted part image') })
-  }
-
   changeButtonClass(id, newClass) {
     document.getElementById(id).className = newClass;
   }
