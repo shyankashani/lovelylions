@@ -17,6 +17,13 @@ body {
     -ms-user-select: none; /* IE10+ */
 }
 
+.portrait {
+  background-image: url(./rotateIcon.png);
+  width: 200px;
+  height: 200px;
+  margin-left: 75px;
+}
+
 .exquisite-writer {
   position: absolute;
   top: 0;
