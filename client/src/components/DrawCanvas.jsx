@@ -145,8 +145,10 @@ class DrawCanvas extends React.Component {
           <canvas
             style={style}
             onMouseLeave={this.endDraw.bind(this)}
-            onMouseMove={this.drawing.bind(this)} onMouseDown={this.startDraw.bind(this)}
-            onMouseUp={this.endDraw.bind(this)} id='canvas' width={this.state.width} height={this.state.height}>
+            onMouseMove={this.drawing.bind(this)} touchMove={this.drawing.bind(this)} onMouseDown={this.startDraw.bind(this)}
+            touchStart={this.startDraw.bind(this)}
+            onMouseUp={this.endDraw.bind(this)} touchEnd={this.endDraw.bind(this)} 
+            id='canvas' width={this.state.width} height={this.state.height}>
           </canvas>
           <img className="overlay" src="paper.png" width="900px" height="450px" />
           <img className="overlay outline" src={this.state.bodyPart + '.png'} />
