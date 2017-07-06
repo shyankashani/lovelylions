@@ -143,10 +143,10 @@ class DrawCanvas extends React.Component {
       this.offsetLeft = this.canvas.offsetLeft;
       this.offsetTop = this.canvas.offsetTop;
     }).bind(this);
-    // document.addEventListener('scroll', (event) => {
-    //   this.scrollLeft = document.body.scrollLeft;
-    //   this.scrollTop = document.body.scrollTop;
-    // });
+    document.addEventListener('scroll', (event) => {
+      this.scrollLeft = document.body.scrollLeft;
+      this.scrollTop = document.body.scrollTop;
+    });
    
   }
 
