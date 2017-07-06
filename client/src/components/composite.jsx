@@ -46,9 +46,9 @@ class Composite extends React.Component {
         </canvas>
         <div className="button-cluster">
           <button onClick={()=>{this.regenerate()}}>regenerate</button>
-          <button onClick={ ()=> { this.props.fixHead(this.props.pic.head) } }>lock head</button>
-          <button onClick={ ()=> { this.props.fixTorso(this.props.pic.torso) } }>lock torso</button>
-          <button onClick={ ()=> { this.props.fixLegs(this.props.pic.legs) } }>lock legs</button>
+          <button onClick={()=>{this.props.fixHead(this.props.pic.head)}}>lock head</button>
+          <button onClick={()=>{this.props.fixTorso(this.props.pic.torso)}}>lock torso</button>
+          <button onClick={()=>{this.props.fixLegs(this.props.pic.legs)}}>lock legs</button>
           {this.props.login ? <button onClick={this.saveImage.bind(this)}>save</button> : ''}
         </div>
       </div>

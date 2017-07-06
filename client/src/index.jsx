@@ -25,7 +25,10 @@ class App extends React.Component {
       pics: [],
       fixedHead: undefined,
       fixedTorso: undefined,
-      fixedLegs: undefined
+      fixedLegs: undefined,
+      headIsFixed: false,
+      torsoIsFixed: false,
+      legsIsFixed: false
     };
     this.componentSwitch = this.componentSwitch.bind(this);
     this.generateImage = this.generateImage.bind(this);
@@ -48,27 +51,53 @@ class App extends React.Component {
   }
 
   generateImage(userImage) {
-    var userPart = Object.keys(userImage)[0];
-    fetch(`/generate?part=${userPart}`).then(res => res.json())
+    if (!Array.isArray(userImage)) {
+      var userPart = Object.keys(userImage)[0];
+      fetch(`/generate?part=${userPart}`).then(res => res.json())
       .then(generatedImage => {
         generatedImage[userPart] = userImage[userPart];
         this.setState({currentView: ''});
         this.setState({
           currentView: <Composite
-              pic={generatedImage}
-              userPart={userPart}
-              generateImage={this.generateImage}
-              saveImage={this.saveComposite}
-              login={this.state.login}
-              fixHead={this.fixHead.bind(this)}
-              fixTorso={this.fixTorso.bind(this)}
-              fixLegs={this.fixLegs.bind(this)}
-              fixedHead={this.state.fixedHead}
-              fixedTorso={this.state.fixedTorso}
-              fixedLegs={this.state.fixedLegs}
-            />
-        });
+          pic={generatedImage}
+          userPart={userPart}
+          generateImage={this.generateImage}
+          saveImage={this.saveComposite}
+          login={this.state.login}
+          fixHead={this.fixHead.bind(this)}
+          fixTorso={this.fixTorso.bind(this)}
+          fixLegs={this.fixLegs.bind(this)}
+          fixedHead={this.state.fixedHead}
+          fixedTorso={this.state.fixedTorso}
+          fixedLegs={this.state.fixedLegs}
+          />
       });
+    });
+  } else {
+    fetch(`/generate?headIsFixed=${this.state.headIsFixed}&torsoIsFixed=${this.state.torsoIsFixed}&legsIsFixed=${this.state.legsIsFixed}`)
+    .then(res => res.json())
+    .then(generatedImage => {
+      if (this.state.headIsFixed) { generatedImage.head = this.state.fixedHead }
+      if (this.state.torsoIsFixed) { generatedImage.torso = this.state.fixedTorso }
+      if (this.state.legsIsFixed) { generatedImage.legs = this.state.fixedLegs }
+      this.setState({currentView: ''});
+      this.setState({
+        currentView: <Composite
+        pic={generatedImage}
+        userPart={userPart}
+        generateImage={this.generateImage}
+        saveImage={this.saveComposite}
+        login={this.state.login}
+        fixHead={this.fixHead.bind(this)}
+        fixTorso={this.fixTorso.bind(this)}
+        fixLegs={this.fixLegs.bind(this)}
+        fixedHead={this.state.fixedHead}
+        fixedTorso={this.state.fixedTorso}
+        fixedLegs={this.state.fixedLegs}
+        />
+    });
+  });
+  }
   }
 
   saveComposite(compositeImage, userPart) {
@@ -89,11 +118,13 @@ class App extends React.Component {
   fixHead(picPart) {
     if (this.state.fixedHead === undefined) {
       this.setState({
-        fixedHead: picPart
+        fixedHead: picPart,
+        headIsFixed: true
       })
     } else {
       this.setState({
-        fixedHead: undefined
+        fixedHead: undefined,
+        headIsFixed: false
       })
     }
   }
@@ -101,11 +132,13 @@ class App extends React.Component {
   fixTorso(picPart) {
     if (this.state.fixedTorso === undefined) {
       this.setState({
-        fixedTorso: picPart
+        fixedTorso: picPart,
+        torsoIsFixed: true
       })
     } else {
       this.setState({
-        fixedTorso: undefined
+        fixedTorso: undefined,
+        torsoIsFixed: false
       })
     }
   }
@@ -113,11 +146,13 @@ class App extends React.Component {
   fixLegs(picPart) {
     if (this.state.fixedLegs === undefined) {
       this.setState({
-        fixedLegs: picPart
+        fixedLegs: picPart,
+        legsIsFixed: true
       })
     } else {
       this.setState({
-        fixedLegs: undefined
+        fixedLegs: undefined,
+        legsIsFixed: false
       })
     }
   }

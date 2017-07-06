@@ -70,11 +70,22 @@ app.get('/gallery', (req, res) => {
 });
 
 app.get('/generate', (req, res) => {
-  var userPart = req.query.part;
-  var diff = difference(['head', 'torso', 'legs'], [userPart])
-  db.getImages(diff, (data) => {
-    res.send(JSON.stringify(data));
-  });
+  if (req.query.part) {
+    var userPart = req.query.part;
+    var diff = difference(['head', 'torso', 'legs'], [userPart])
+    db.getImages(diff, (data) => {
+      res.send(JSON.stringify(data));
+    });
+  } else {
+    var fixedParts = [];
+    if (req.query.headIsFixed === 'false') { fixedParts.push('head') }
+    if (req.query.torsoIsFixed === 'false') { fixedParts.push('torso') }
+    if (req.query.legsIsFixed === 'false') { fixedParts.push('legs') }
+    console.log('fixedParts', fixedParts);
+    db.getImages(fixedParts, (data) => {
+      res.send(JSON.stringify(data));
+    });
+  }
 });
 
 app.post('/save', (req, res) => {
