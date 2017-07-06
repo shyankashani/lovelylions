@@ -57,7 +57,7 @@ class DrawCanvas extends React.Component {
   }
 
   drawing(event) {
-    console.log(event.touches);
+    console.log(event.target === canvas);
     var left = event.clientX - this.offsetLeft + this.scrollLeft;
     var top = event.clientY - this.offsetTop + this.scrollTop;
     if (this.isDrawing) {
@@ -67,7 +67,9 @@ class DrawCanvas extends React.Component {
   }
 
   touchDrawing(event) {
-    //console.log(event.touches);
+    console.log(event.touches);
+    console.log(event.target === canvas);
+    event.preventDefault();
     var left = event.touches[0].clientX - this.offsetLeft + this.scrollLeft;
     var top = event.touches[0].clientY - this.offsetTop + this.scrollTop;
     if (this.isDrawing) {
