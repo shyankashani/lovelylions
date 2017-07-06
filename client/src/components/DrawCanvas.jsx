@@ -74,7 +74,7 @@ class DrawCanvas extends React.Component {
   }
 
   drawing(event) {
-    console.log(event.clientX);
+    console.log(event.touches);
     var left = event.clientX - this.offsetLeft + this.scrollLeft;
     var top = event.clientY - this.offsetTop + this.scrollTop;
     if (this.isDrawing) {
@@ -82,6 +82,17 @@ class DrawCanvas extends React.Component {
       this.redraw();
     }
   }
+
+  touchDrawing(event) {
+    console.log(event.touches);
+    var left = event.touches[0].clientX - this.offsetLeft + this.scrollLeft;
+    var top = event.touches[0].clientY - this.offsetTop + this.scrollTop;
+    if (this.isDrawing) {
+      this.addToDrawingEvents(left, top, true);
+      this.redraw();
+    }
+  }
+
 
   addToDrawingEvents(x, y, drag) {
     this.drawingPoints.push({x: x, y: y, drag: drag})
@@ -163,7 +174,7 @@ class DrawCanvas extends React.Component {
           <canvas
             style={style}
             onMouseLeave={this.endDraw.bind(this)}
-            onMouseMove={this.drawing.bind(this)} onTouchMove={this.drawing.bind(this)} onMouseDown={this.startDraw.bind(this)}
+            onMouseMove={this.drawing.bind(this)} onTouchMove={this.touchDrawing.bind(this)} onMouseDown={this.startDraw.bind(this)}
             onTouchStart={this.startDraw.bind(this)}
             onMouseUp={this.endDraw.bind(this)} onTouchEnd={this.endDraw.bind(this)} 
             id='canvas' width={this.state.width} height={this.state.height}>
