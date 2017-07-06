@@ -18,17 +18,17 @@ class DrawCanvas extends React.Component {
     this.scrollTop = 0;
 
         // Prevent scrolling when touching the canvas
-    document.body.addEventListener("touchstart", function (e) {
+    document.body.addEventListener("onTouchStart", function (e) {
       if (e.target == canvas) {
         e.preventDefault();
       }
     }, false);
-    document.body.addEventListener("touchend", function (e) {
+    document.body.addEventListener("onTouchEnd", function (e) {
       if (e.target == canvas) {
         e.preventDefault();
       }
     }, false);
-    document.body.addEventListener("touchmove", function (e) {
+    document.body.addEventListener("onTouchMove", function (e) {
       if (e.target == canvas) {
         e.preventDefault();
       }
