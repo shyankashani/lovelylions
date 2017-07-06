@@ -64,10 +64,7 @@ let getTwoImages = (part, callback) => {
     // e.g. if you give it 'head', it gives you torso image and leg image
   let arr1 = ['head', 'torso', 'legs'];
   let diff = difference(arr1, [part]);
-  let partA = diff[0];
-  let partB = diff[1];
-  console.log('partA', partA);
-  console.log('partB', partB);
+  let partA = diff[0], partB = diff[1];
 
   var obj = {};
   obj[partA] = {};
@@ -149,12 +146,6 @@ let savePartImage = (userId, part, path, callback) => {
   })
 };
 
-let deletePartImage = (part, id, callback) => {
-  db.one(`DELETE FROM ${part} WHERE id=${id}`)
-  .then(data => { callback(data) })
-  .catch(error => { console.log(error) })
-};
-
 let saveImageToFinalImage = (obj, part, path, callback) => {
   let username = obj[part]['artist'];
   let userId;
@@ -214,7 +205,6 @@ module.exports = {
   getTwoImages: getTwoImages,
   getImages: getImages,
   savePartImage: savePartImage,
-  deletePartImage: deletePartImage,
   getAllFinalImagesOfArtist: getAllFinalImagesOfArtist,
   db: db,
   getUserId: getUserId,
