@@ -70,6 +70,9 @@ class App extends React.Component {
           fixedHead={this.state.fixedHead}
           fixedTorso={this.state.fixedTorso}
           fixedLegs={this.state.fixedLegs}
+          headIsFixed={this.state.headIsFixed}
+          torsoIsFixed={this.state.torsoIsFixed}
+          legsIsFixed={this.state.legsIsFixed}
           />
       });
     });
@@ -94,6 +97,9 @@ class App extends React.Component {
         fixedHead={this.state.fixedHead}
         fixedTorso={this.state.fixedTorso}
         fixedLegs={this.state.fixedLegs}
+        headIsFixed={this.state.headIsFixed}
+        torsoIsFixed={this.state.torsoIsFixed}
+        legsIsFixed={this.state.legsIsFixed}
         />
     });
   });
@@ -115,17 +121,21 @@ class App extends React.Component {
     .then(() => { console.log('successfully deleted part image') })
   }
 
+  changeButtonClass(id, newClass) {
+    document.getElementById(id).className = newClass;
+  }
+
   fixHead(picPart) {
     if (this.state.fixedHead === undefined) {
       this.setState({
         fixedHead: picPart,
         headIsFixed: true
-      })
+      }, ()=>{this.changeButtonClass('head', 'true')})
     } else {
       this.setState({
         fixedHead: undefined,
         headIsFixed: false
-      })
+      }, ()=>{this.changeButtonClass('head', 'false')})
     }
   }
 
@@ -134,12 +144,12 @@ class App extends React.Component {
       this.setState({
         fixedTorso: picPart,
         torsoIsFixed: true
-      })
+      }, ()=>{this.changeButtonClass('torso', 'true')})
     } else {
       this.setState({
         fixedTorso: undefined,
         torsoIsFixed: false
-      })
+      }, ()=>{this.changeButtonClass('torso', 'false')})
     }
   }
 
@@ -148,12 +158,12 @@ class App extends React.Component {
       this.setState({
         fixedLegs: picPart,
         legsIsFixed: true
-      })
+      }, ()=>{this.changeButtonClass('legs', 'true')})
     } else {
       this.setState({
         fixedLegs: undefined,
         legsIsFixed: false
-      })
+      }, ()=>{this.changeButtonClass('legs', 'false')})
     }
   }
 
