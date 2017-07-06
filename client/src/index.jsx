@@ -22,7 +22,8 @@ class App extends React.Component {
     this.state = {
       login: name ? name : null,
       currentView: <DrawCanvas generateImage={this.generateImage.bind(this)}/>,
-      pics: []
+      pics: [],
+      fixedParts: []
     };
     this.componentSwitch = this.componentSwitch.bind(this);
     this.generateImage = this.generateImage.bind(this);
@@ -57,8 +58,10 @@ class App extends React.Component {
               generateImage={this.generateImage}
               saveImage={this.saveComposite}
               login={this.state.login}
+              fixParts={this.fixParts.bind(this)}
+              fixedParts={this.state.fixedParts}
             />
-        }, () => { console.log('user part', userPart) });
+        }, () => { console.log('user part', userPart); console.log('pic', generatedImage) });
       });
   }
 
@@ -69,6 +72,10 @@ class App extends React.Component {
       'headers': {'Content-Type': 'application/json'},
       'body': JSON.stringify(compositeImage)
     }).then(() => this.fetchGallery())
+  }
+
+  fixParts(...args) {
+    this.setState({ fixedParts: [...args] });
   }
 
   render() {

@@ -24,6 +24,7 @@ class Composite extends React.Component {
   }
 
   regenerate() {
+    console.log('this.props.pic', this.props.pic);
     var pathValue = this.props.pic[this.props.userPart];
     var userImage = {}
     userImage[this.props.userPart] = pathValue;
@@ -40,8 +41,10 @@ class Composite extends React.Component {
         <canvas width="300px" height="450px">
         </canvas>
         <div className="button-cluster">
-          <button onClick={this.regenerate.bind(this)}>regenerate</button>
-          <button onClick{()=>{} }
+          <button onClick={()=>{this.regenerate()}}>regenerate</button>
+          <button onClick={ ()=> { this.props.fixParts('head', 'torso', 'legs') } }>lock head</button>
+          <button>lock torso</button>
+          <button>lock legs</button>
           {this.props.login ? <button onClick={this.saveImage.bind(this)}>save</button> : ''}
         </div>
       </div>
