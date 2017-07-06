@@ -167,3 +167,7 @@ canvas {
   max-width: 100%;
   max-height: auto;
 }
+
+.true {
+  background-color: limegreen;
+}
