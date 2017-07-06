@@ -149,6 +149,12 @@ let savePartImage = (userId, part, path, callback) => {
   })
 };
 
+let deletePartImage = (part, id, callback) => {
+  db.one(`DELETE FROM ${part} WHERE id=${id}`)
+  .then(data => { callback(data) })
+  .catch(error => { console.log(error) })
+};
+
 let saveImageToFinalImage = (obj, part, path, callback) => {
   let username = obj[part]['artist'];
   let userId;
@@ -208,6 +214,7 @@ module.exports = {
   getTwoImages: getTwoImages,
   getImages: getImages,
   savePartImage: savePartImage,
+  deletePartImage: deletePartImage,
   getAllFinalImagesOfArtist: getAllFinalImagesOfArtist,
   db: db,
   getUserId: getUserId,

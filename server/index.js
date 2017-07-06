@@ -93,6 +93,12 @@ app.post('/save', (req, res) => {
   // });
 });
 
+app.get('/delete', (req, res) => {
+  db.deletePartImage(req.query.part, req.query.id, (data) => {
+    res.send(data);
+  })
+})
+
 app.get('/images', (req, res) => {
   var file = req.query.path;
   res.sendFile(`${__dirname}/images/${file}`, () => res.end());
