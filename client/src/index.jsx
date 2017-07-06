@@ -73,7 +73,8 @@ class App extends React.Component {
           headIsFixed={this.state.headIsFixed}
           torsoIsFixed={this.state.torsoIsFixed}
           legsIsFixed={this.state.legsIsFixed}
-          />
+          />,
+          userPart: userPart
       });
     });
   } else {
@@ -87,7 +88,7 @@ class App extends React.Component {
       this.setState({
         currentView: <Composite
         pic={generatedImage}
-        userPart={userPart}
+        userPart={this.state.userPart}
         generateImage={this.generateImage}
         saveImage={this.saveComposite}
         login={this.state.login}
