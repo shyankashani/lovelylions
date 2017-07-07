@@ -192,26 +192,34 @@ class App extends React.Component {
           <MediaQuery orientation='portrait'>
             <ExquisiteWriter />
             <div className='portrait'></div>
+            <div className="foreground">
+            <div className="nav-bar-mobile">
+              <h1>cadavre exquis</h1>
+              
+            </div>
+          </div>
+          <footer className="footer">hi</footer>
           </MediaQuery>
           <MediaQuery orientation='landscape'>
             <ExquisiteWriter />
             <div className="foreground">
               {this.state.currentView}
-              <div className="nav-bar-mobile">
-              <a href="#" onClick={this.componentSwitch}>canvas</a>
+              
+            </div>
+            
+
               {this.state.login ? (
                 <span>
                   <a href="#" onClick={this.componentSwitch}>gallery</a>
                   <a className="user-button" href="/logout">
-                    <span className="login"></span>
+                    <span className="login">{this.state.login.toLowerCase()}</span>
                     <span className="logout"></span>
                   </a>
                 </span>
               ) : (
                 <a href="/auth/facebook" >login</a>
               )}
-            </div>
-            </div>
+            
           </MediaQuery>
         </MediaQuery>
       </div>
