@@ -139,7 +139,7 @@ class DrawCanvas extends React.Component {
     this.context.shadowBlur = 5;
     this.offsetLeft = this.canvas.offsetLeft;
     this.offsetTop = this.canvas.offsetTop;
-    window.onresize = (event => {g
+    window.onresize = (event => {
       this.offsetLeft = this.canvas.offsetLeft;
       this.offsetTop = this.canvas.offsetTop;
     }).bind(this);
