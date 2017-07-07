@@ -42,6 +42,10 @@ class App extends React.Component {
     this.saveComposite = this.saveComposite.bind(this);
   }
 
+  componentDidUpdate() {
+    ReactDOM.findDOMNode(this).scrollTop = 0
+  }
+
   componentSwitch(e) {
     e.preventDefault();
     var targetVal = e.target.innerText;
