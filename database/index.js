@@ -4,18 +4,20 @@ const options = {
     promiseLib: Promise
 };
 const pgp = require('pg-promise')(options);
+
 const cn = {
-    host: 'localhost',
-    port: 5432,
-    database: 'mydb',
-    user: 'vincentla',
-    password: ''
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 5432,
+    database: process.env.DB_NAME || 'exquiste',
+    user: process.env.DB_USERNAME || 'shyankashani',
+    password: process.env.DB_PASSWORD || ''
 };
 
 if (process.env.DATABASE_URL) {
   console.log('connected to heroku postgres db');
   pgp.pg.defaults.ssl = true;
 };
+
 const db = pgp(process.env.DATABASE_URL || cn);
 
 let query = function(queryStr, callback){
@@ -77,6 +79,52 @@ let getTwoImages = (part, callback) => {
     });
   });
 };
+
+let getImages = (parts, callback) => {
+  var obj = {};
+
+  if (parts.length === 1) {
+    obj[parts[0]] = {};
+    getRandomImage(parts[0], (data, id) => {
+      obj[parts[0]]['path'] = data;
+      obj[parts[0]]['partId'] = id;
+      callback(obj);
+    })
+  }
+
+  if (parts.length === 2) {
+    obj[parts[0]] = {};
+    obj[parts[1]] = {};
+    getRandomImage(parts[0], (data, id) => {
+      obj[parts[0]]['path'] = data;
+      obj[parts[0]]['partId'] = id;
+      getRandomImage(parts[1], (data, id) => {
+        obj[parts[1]]['path'] = data;
+        obj[parts[1]]['partId'] = id;
+        callback(obj)
+      });
+    });
+  }
+
+  if (parts.length === 3) {
+    obj[parts[0]] = {};
+    obj[parts[1]] = {};
+    obj[parts[2]] = {};
+    getRandomImage(parts[0], (data, id) => {
+      obj[parts[0]]['path'] = data;
+      obj[parts[0]]['partId'] = id;
+      getRandomImage(parts[1], (data, id) => {
+        obj[parts[1]]['path'] = data;
+        obj[parts[1]]['partId'] = id;
+        getRandomImage(parts[2], (data, id) => {
+          obj[parts[2]]['path'] = data;
+          obj[parts[2]]['partId'] = id;
+          callback(obj)
+        });
+      });
+    });
+  }
+}
 
 let getUserId = (username, callback) => {
   db.one('SELECT ID from artist where username = $1', [username])
@@ -155,6 +203,7 @@ module.exports = {
   getImage: getImage,
   getRandomImage: getRandomImage,
   getTwoImages: getTwoImages,
+  getImages: getImages,
   savePartImage: savePartImage,
   getAllFinalImagesOfArtist: getAllFinalImagesOfArtist,
   db: db,
