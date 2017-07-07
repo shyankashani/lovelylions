@@ -51,7 +51,7 @@ class App extends React.Component {
         fixHead={this.fixHead.bind(this)}
         fixTorso={this.fixTorso.bind(this)}
         fixLegs={this.fixLegs.bind(this)}
-        />});
+        />}, ()=>{this.unfixAll()});
     } else if (targetVal === 'gallery') {
       this.fetchGallery();
     }
@@ -88,7 +88,7 @@ class App extends React.Component {
           userPartIsFixed={this.userPartIsFixed.bind(this)}
           />,
           userPart: userPart
-      }, ()=>{console.log('userPart:', userPart, 'generatedImage:', generatedImage ); this.setFixedPart(userPart, generatedImage[userPart])});
+      }, ()=>{this.setFixedPart(userPart, generatedImage[userPart])});
     });
   } else {
     fetch(`/generate?headIsFixed=${this.state.headIsFixed}&torsoIsFixed=${this.state.torsoIsFixed}&legsIsFixed=${this.state.legsIsFixed}`)
@@ -145,6 +145,17 @@ class App extends React.Component {
 
   changeButtonClass(id, newClass) {
     document.getElementById(id).className = newClass;
+  }
+
+  unfixAll() {
+    this.setState({
+      fixedHead: undefined,
+      fixedTorso: undefined,
+      fixedLegs: undefined,
+      headIsFixed: true,
+      torsoIsFixed: false,
+      legsIsFixed: false
+    })
   }
 
   fixHead(picPart) {
