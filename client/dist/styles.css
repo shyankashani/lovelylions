@@ -2,7 +2,7 @@ body {
   margin: 0px;
   font-family: 'Work Sans', sans-serif;
   background-color: #fffdf9;
-  overflow: hidden;
+  
 }
 
 .foreground {
@@ -18,10 +18,25 @@ body {
 }
 
 .portrait {
-  background-image: url(./rotateIcon.png);
-  width: 200px;
-  height: 200px;
-  margin-left: 75px;
+    background-image: url(./rotateIcon.png);
+    /* min-width: 300px; */
+    width: 400px;
+    height: 400px;
+    margin-left: 75px;
+    /* background: no-repeat; */
+    background-size: 400px 400px;
+}
+
+.mobile-login {
+    font-size: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
 }
 
 .exquisite-writer {
@@ -50,8 +65,7 @@ body {
 }
 
 .nav-bar-mobile {
-  width: 900px;
-  margin: -70px;
+  width: 100%;
   color: #050505;
   text-align: left;
   padding: 10px;

@@ -42,6 +42,10 @@ class App extends React.Component {
     this.saveComposite = this.saveComposite.bind(this);
   }
 
+  componentDidUpdate() {
+    ReactDOM.findDOMNode(this).scrollTop = 0
+  }
+
   componentSwitch(e) {
     e.preventDefault();
     var targetVal = e.target.innerText;
@@ -228,15 +232,10 @@ class App extends React.Component {
           <MediaQuery orientation='portrait'>
             <ExquisiteWriter />
             <div className='portrait'></div>
-          </MediaQuery>
-          <MediaQuery orientation='landscape'>
-            <ExquisiteWriter />
             <div className="foreground">
-              {this.state.currentView}
-              <div className="nav-bar-mobile">
-              <a href="#" onClick={this.componentSwitch}>canvas</a>
+              <h1>cadavre exquis</h1>
               {this.state.login ? (
-                <span>
+                <span className="mobile-login">
                   <a href="#" onClick={this.componentSwitch}>gallery</a>
                   <a className="user-button" href="/logout">
                     <span className="login">{this.state.login.toLowerCase()}</span>
@@ -244,10 +243,15 @@ class App extends React.Component {
                   </a>
                 </span>
               ) : (
-                <a href="/auth/facebook" >login</a>
-              )}
-            </div>
-            </div>
+                <a className="mobile-login" href="/auth/facebook" >login</a>
+              )}       
+          </div>
+          </MediaQuery>
+          <MediaQuery orientation='landscape'>
+            <ExquisiteWriter />
+            <div className="foreground">
+              {this.state.currentView}     
+            </div> 
           </MediaQuery>
         </MediaQuery>
       </div>
