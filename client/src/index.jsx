@@ -4,6 +4,8 @@ import DrawCanvas from './components/DrawCanvas.jsx';
 import Gallery from './components/Gallery.jsx';
 import ReactDOM from 'react-dom';
 import Composite from './components/composite.jsx';
+import MediaQuery from 'react-responsive';
+
 
 var testURL = '/images/?file=legs.png'
 
@@ -165,25 +167,53 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <ExquisiteWriter />
-        <div className="foreground">
-          <div className="nav-bar">
-            <h1>cadavre exquis</h1>
-            <a href="#" onClick={this.componentSwitch}>canvas</a>
-            {this.state.login ? (
-              <span>
-                <a href="#" onClick={this.componentSwitch}>gallery</a>
-                <a className="user-button" href="/logout">
-                  <span className="login">{this.state.login.toLowerCase()}</span>
-                  <span className="logout"></span>
-                </a>
-              </span>
-            ) : (
-              <a href="/auth/facebook">login</a>
-            )}
+        <MediaQuery minDeviceWidth={1224}>
+          <ExquisiteWriter />
+          <div className="foreground">
+            <div className="nav-bar">
+              <h1>cadavre exquis</h1>
+              <a href="#" onClick={this.componentSwitch}>canvas</a>
+              {this.state.login ? (
+                <span>
+                  <a href="#" onClick={this.componentSwitch}>gallery</a>
+                  <a className="user-button" href="/logout">
+                    <span className="login">{this.state.login.toLowerCase()}</span>
+                    <span className="logout"></span>
+                  </a>
+                </span>
+              ) : (
+                <a href="/auth/facebook" >login</a>
+              )}
+            </div>
+            {this.state.currentView}
           </div>
-          {this.state.currentView}
-        </div>
+        </MediaQuery>
+         <MediaQuery maxDeviceWidth={1224}>
+          <MediaQuery orientation='portrait'>
+            <ExquisiteWriter />
+            <div className='portrait'></div>
+          </MediaQuery>
+          <MediaQuery orientation='landscape'>
+            <ExquisiteWriter />
+            <div className="foreground">
+              {this.state.currentView}
+              <div className="nav-bar-mobile">
+              <a href="#" onClick={this.componentSwitch}>canvas</a>
+              {this.state.login ? (
+                <span>
+                  <a href="#" onClick={this.componentSwitch}>gallery</a>
+                  <a className="user-button" href="/logout">
+                    <span className="login">{this.state.login.toLowerCase()}</span>
+                    <span className="logout"></span>
+                  </a>
+                </span>
+              ) : (
+                <a href="/auth/facebook" >login</a>
+              )}
+            </div>
+            </div>
+          </MediaQuery>
+        </MediaQuery>
       </div>
     );
   }

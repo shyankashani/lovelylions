@@ -2,7 +2,7 @@ body {
   margin: 0px;
   font-family: 'Work Sans', sans-serif;
   background-color: #fffdf9;
-
+  overflow: hidden;
 }
 
 .foreground {
@@ -15,6 +15,13 @@ body {
     -moz-user-select: none; /* mozilla browsers */
     -khtml-user-select: none; /* webkit (konqueror) browsers */
     -ms-user-select: none; /* IE10+ */
+}
+
+.portrait {
+  background-image: url(./rotateIcon.png);
+  width: 200px;
+  height: 200px;
+  margin-left: 75px;
 }
 
 .exquisite-writer {
@@ -42,7 +49,15 @@ body {
   padding: 10px;
 }
 
-.nav-bar h1 {
+.nav-bar-mobile {
+  width: 900px;
+  margin: -70px;
+  color: #050505;
+  text-align: left;
+  padding: 10px;
+}
+
+.nav-bar h1, .nav-bar-mobile h1 {
   display: inline;
   font-size: 36pt;
 }
@@ -51,7 +66,7 @@ a {
   color: #050505;
 }
 
-.nav-bar a {
+.nav-bar a, .nav-bar-mobile a {
   font-size: 16pt;
   margin: -5px 8px;
   float: right;
