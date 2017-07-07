@@ -63,7 +63,7 @@ class Composite extends React.Component {
             id="legs">
             lock legs
           </button>
-          {this.props.login ? <button onClick={this.saveImage.bind(this)}>save</button> : ''}
+          {this.props.login && this.props.userPartIsFixed() ? <button onClick={this.saveImage.bind(this)}>save</button> : ''}
         </div>
       </div>
     );
