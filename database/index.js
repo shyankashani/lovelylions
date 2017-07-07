@@ -80,6 +80,52 @@ let getTwoImages = (part, callback) => {
   });
 };
 
+let getImages = (parts, callback) => {
+  var obj = {};
+
+  if (parts.length === 1) {
+    obj[parts[0]] = {};
+    getRandomImage(parts[0], (data, id) => {
+      obj[parts[0]]['path'] = data;
+      obj[parts[0]]['partId'] = id;
+      callback(obj);
+    })
+  }
+
+  if (parts.length === 2) {
+    obj[parts[0]] = {};
+    obj[parts[1]] = {};
+    getRandomImage(parts[0], (data, id) => {
+      obj[parts[0]]['path'] = data;
+      obj[parts[0]]['partId'] = id;
+      getRandomImage(parts[1], (data, id) => {
+        obj[parts[1]]['path'] = data;
+        obj[parts[1]]['partId'] = id;
+        callback(obj)
+      });
+    });
+  }
+
+  if (parts.length === 3) {
+    obj[parts[0]] = {};
+    obj[parts[1]] = {};
+    obj[parts[2]] = {};
+    getRandomImage(parts[0], (data, id) => {
+      obj[parts[0]]['path'] = data;
+      obj[parts[0]]['partId'] = id;
+      getRandomImage(parts[1], (data, id) => {
+        obj[parts[1]]['path'] = data;
+        obj[parts[1]]['partId'] = id;
+        getRandomImage(parts[2], (data, id) => {
+          obj[parts[2]]['path'] = data;
+          obj[parts[2]]['partId'] = id;
+          callback(obj)
+        });
+      });
+    });
+  }
+}
+
 let getUserId = (username, callback) => {
   db.one('SELECT ID from artist where username = $1', [username])
   .then((data) => {
@@ -157,6 +203,7 @@ module.exports = {
   getImage: getImage,
   getRandomImage: getRandomImage,
   getTwoImages: getTwoImages,
+  getImages: getImages,
   savePartImage: savePartImage,
   getAllFinalImagesOfArtist: getAllFinalImagesOfArtist,
   db: db,

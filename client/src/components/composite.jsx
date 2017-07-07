@@ -24,10 +24,14 @@ class Composite extends React.Component {
   }
 
   regenerate() {
+    var fixedParts = [];
+    if (this.props.fixedHead) { fixedParts.push('head') }
+    if (this.props.fixedTorso) { fixedParts.push('torso') }
+    if (this.props.fixedLegs) { fixedParts.push('legs') }
     var pathValue = this.props.pic[this.props.userPart];
     var userImage = {}
     userImage[this.props.userPart] = pathValue;
-    this.props.generateImage(userImage);
+    this.props.generateImage(fixedParts);
   }
 
   saveImage() {
@@ -40,7 +44,25 @@ class Composite extends React.Component {
         <canvas width="300px" height="450px">
         </canvas>
         <div className="button-cluster">
-          <button onClick={this.regenerate.bind(this)}>regenerate</button>
+          <button onClick={()=>{this.regenerate()}}>regenerate</button>
+          <button
+            onClick={()=>{this.props.fixHead(this.props.pic.head)}}
+            className={this.props.headIsFixed}
+            id="head">
+            lock head
+          </button>
+          <button
+            onClick={()=>{this.props.fixTorso(this.props.pic.torso)}}
+            className={this.props.torsoIsFixed}
+            id="torso">
+            lock torso
+          </button>
+          <button
+            onClick={()=>{this.props.fixLegs(this.props.pic.legs)}}
+            className={this.props.legsIsFixed}
+            id="legs">
+            lock legs
+          </button>
           {this.props.login ? <button onClick={this.saveImage.bind(this)}>save</button> : ''}
         </div>
       </div>
