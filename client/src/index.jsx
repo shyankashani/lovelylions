@@ -23,12 +23,17 @@ class App extends React.Component {
     //
     this.state = {
       login: name ? name : null,
-      currentView: <DrawCanvas generateImage={this.generateImage.bind(this)}/>,
+      currentView: <DrawCanvas
+        generateImage={this.generateImage.bind(this)}
+        fixHead={this.fixHead.bind(this)}
+        fixTorso={this.fixTorso.bind(this)}
+        fixLegs={this.fixLegs.bind(this)}
+        />,
       pics: [],
       fixedHead: undefined,
       fixedTorso: undefined,
       fixedLegs: undefined,
-      headIsFixed: false,
+      headIsFixed: true,
       torsoIsFixed: false,
       legsIsFixed: false
     };
@@ -41,7 +46,12 @@ class App extends React.Component {
     e.preventDefault();
     var targetVal = e.target.innerText;
     if (targetVal === 'canvas') {
-      this.setState({currentView: <DrawCanvas generateImage={this.generateImage.bind(this)}/>});
+      this.setState({currentView: <DrawCanvas
+        generateImage={this.generateImage.bind(this)}
+        fixHead={this.fixHead.bind(this)}
+        fixTorso={this.fixTorso.bind(this)}
+        fixLegs={this.fixLegs.bind(this)}
+        />}, ()=>{this.unfixAll()});
     } else if (targetVal === 'gallery') {
       this.fetchGallery();
     }
@@ -75,9 +85,10 @@ class App extends React.Component {
           headIsFixed={this.state.headIsFixed}
           torsoIsFixed={this.state.torsoIsFixed}
           legsIsFixed={this.state.legsIsFixed}
+          userPartIsFixed={this.userPartIsFixed.bind(this)}
           />,
           userPart: userPart
-      });
+      }, ()=>{this.setFixedPart(userPart, generatedImage[userPart])});
     });
   } else {
     fetch(`/generate?headIsFixed=${this.state.headIsFixed}&torsoIsFixed=${this.state.torsoIsFixed}&legsIsFixed=${this.state.legsIsFixed}`)
@@ -103,10 +114,24 @@ class App extends React.Component {
         headIsFixed={this.state.headIsFixed}
         torsoIsFixed={this.state.torsoIsFixed}
         legsIsFixed={this.state.legsIsFixed}
+        userPartIsFixed={this.userPartIsFixed.bind(this)}
         />
     });
   });
   }
+  }
+
+  setFixedPart(part, picPart) {
+    if (part === 'head') { this.setState({ fixedHead: picPart }) }
+    if (part === 'torso') { this.setState({ fixedTorso: picPart }) }
+    if (part === 'legs') { this.setState({ fixedLegs: picPart }) }
+  }
+
+  userPartIsFixed() {
+    if (this.state.userPart === 'head' && this.state.headIsFixed) { return true; }
+    if (this.state.userPart === 'torso' && this.state.torsoIsFixed) { return true; }
+    if (this.state.userPart === 'legs' && this.state.legsIsFixed) { return true; }
+    return false;
   }
 
   saveComposite(compositeImage, userPart) {
@@ -122,8 +147,19 @@ class App extends React.Component {
     document.getElementById(id).className = newClass;
   }
 
+  unfixAll() {
+    this.setState({
+      fixedHead: undefined,
+      fixedTorso: undefined,
+      fixedLegs: undefined,
+      headIsFixed: true,
+      torsoIsFixed: false,
+      legsIsFixed: false
+    })
+  }
+
   fixHead(picPart) {
-    if (this.state.fixedHead === undefined) {
+    if (this.state.headIsFixed === false) {
       this.setState({
         fixedHead: picPart,
         headIsFixed: true
@@ -137,7 +173,7 @@ class App extends React.Component {
   }
 
   fixTorso(picPart) {
-    if (this.state.fixedTorso === undefined) {
+    if (this.state.torsoIsFixed === false) {
       this.setState({
         fixedTorso: picPart,
         torsoIsFixed: true
@@ -151,7 +187,7 @@ class App extends React.Component {
   }
 
   fixLegs(picPart) {
-    if (this.state.fixedLegs === undefined) {
+    if (this.state.legsIsFixed === false) {
       this.setState({
         fixedLegs: picPart,
         legsIsFixed: true

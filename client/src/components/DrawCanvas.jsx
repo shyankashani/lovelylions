@@ -127,7 +127,11 @@ class DrawCanvas extends React.Component {
   }
 
   changePart(event) {
-    this.setState({bodyPart: event.target.value});
+    this.setState({bodyPart: event.target.value}, ()=>{
+      if (this.state.bodyPart === 'head') { this.props.fixHead() }
+      if (this.state.bodyPart === 'torso') { this.props.fixHead(); this.props.fixTorso() }
+      if (this.state.bodyPart === 'legs') { this.props.fixHead(); this.props.fixLegs() }
+    });
   }
 
   componentDidMount() {
