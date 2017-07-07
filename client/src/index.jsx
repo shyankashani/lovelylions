@@ -83,6 +83,7 @@ class App extends React.Component {
           headIsFixed={this.state.headIsFixed}
           torsoIsFixed={this.state.torsoIsFixed}
           legsIsFixed={this.state.legsIsFixed}
+          userPartIsFixed={this.userPartIsFixed.bind(this)}
           />,
           userPart: userPart
       }, ()=>{console.log('userPart:', userPart, 'generatedImage:', generatedImage ); this.setFixedPart(userPart, generatedImage[userPart])});
@@ -111,6 +112,7 @@ class App extends React.Component {
         headIsFixed={this.state.headIsFixed}
         torsoIsFixed={this.state.torsoIsFixed}
         legsIsFixed={this.state.legsIsFixed}
+        userPartIsFixed={this.userPartIsFixed.bind(this)}
         />
     });
   });
@@ -121,6 +123,13 @@ class App extends React.Component {
     if (part === 'head') { this.setState({ fixedHead: picPart }) }
     if (part === 'torso') { this.setState({ fixedTorso: picPart }) }
     if (part === 'legs') { this.setState({ fixedLegs: picPart }) }
+  }
+
+  userPartIsFixed() {
+    if (this.state.userPart === 'head' && this.state.headIsFixed) { return true; }
+    if (this.state.userPart === 'torso' && this.state.torsoIsFixed) { return true; }
+    if (this.state.userPart === 'legs' && this.state.legsIsFixed) { return true; }
+    return false;
   }
 
   saveComposite(compositeImage, userPart) {
