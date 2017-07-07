@@ -203,7 +203,7 @@ class App extends React.Component {
                 <span>
                   <a href="#" onClick={this.componentSwitch}>gallery</a>
                   <a className="user-button" href="/logout">
-                    <span className="login">{this.state.login.toLowerCase()}</span>
+                    <span className="login"></span>
                     <span className="logout"></span>
                   </a>
                 </span>
