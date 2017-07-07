@@ -2,7 +2,7 @@ body {
   margin: 0px;
   font-family: 'Work Sans', sans-serif;
   background-color: #fffdf9;
-  overflow: hidden;
+  
 }
 
 .foreground {
@@ -58,8 +58,7 @@ body {
 }
 
 .nav-bar-mobile {
-  width: 900px;
-  margin: -70px;
+  width: 100%;
   color: #050505;
   text-align: left;
   padding: 10px;

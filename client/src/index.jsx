@@ -229,21 +229,7 @@ class App extends React.Component {
             <ExquisiteWriter />
             <div className='portrait'></div>
             <div className="foreground">
-            <div className="nav-bar-mobile">
               <h1>cadavre exquis</h1>
-              
-            </div>
-          </div>
-          <footer className="footer">hi</footer>
-          </MediaQuery>
-          <MediaQuery orientation='landscape'>
-            <ExquisiteWriter />
-            <div className="foreground">
-              {this.state.currentView}
-              
-            </div>
-            
-
               {this.state.login ? (
                 <span>
                   <a href="#" onClick={this.componentSwitch}>gallery</a>
@@ -254,8 +240,16 @@ class App extends React.Component {
                 </span>
               ) : (
                 <a href="/auth/facebook" >login</a>
-              )}
-            
+              )}       
+            <div className="nav-bar-mobile">
+            </div>
+          </div>
+          </MediaQuery>
+          <MediaQuery orientation='landscape'>
+            <ExquisiteWriter />
+            <div className="foreground">
+              {this.state.currentView}     
+            </div> 
           </MediaQuery>
         </MediaQuery>
       </div>
