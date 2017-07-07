@@ -235,7 +235,7 @@ class App extends React.Component {
             <div className="foreground">
               <h1>cadavre exquis</h1>
               {this.state.login ? (
-                <span>
+                <span className="mobile-login">
                   <a href="#" onClick={this.componentSwitch}>gallery</a>
                   <a className="user-button" href="/logout">
                     <span className="login">{this.state.login.toLowerCase()}</span>
@@ -243,10 +243,8 @@ class App extends React.Component {
                   </a>
                 </span>
               ) : (
-                <a href="/auth/facebook" >login</a>
+                <a className="mobile-login" href="/auth/facebook" >login</a>
               )}       
-            <div className="nav-bar-mobile">
-            </div>
           </div>
           </MediaQuery>
           <MediaQuery orientation='landscape'>
