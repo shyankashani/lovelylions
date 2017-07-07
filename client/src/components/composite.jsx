@@ -36,7 +36,7 @@ class Composite extends React.Component {
 
   saveImage() {
     this.props.saveImage(this.props.pic, this.props.userPart);
-    document.getElementById("save").setAttribute("disabled");
+    document.getElementById("save").setAttribute("disabled", "");
   }
 
   render(){
