@@ -36,6 +36,7 @@ class Composite extends React.Component {
 
   saveImage() {
     this.props.saveImage(this.props.pic, this.props.userPart);
+    document.getElementById("save").setAttribute("disabled");
   }
 
   render(){
@@ -63,7 +64,7 @@ class Composite extends React.Component {
             id="legs">
             lock legs
           </button>
-          {this.props.login && this.props.userPartIsFixed() ? <button onClick={this.saveImage.bind(this)}>save</button> : ''}
+          {this.props.login && this.props.userPartIsFixed() ? <button id="save" onClick={this.saveImage.bind(this)}>save</button> : ''}
         </div>
       </div>
     );
