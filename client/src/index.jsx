@@ -35,7 +35,8 @@ class App extends React.Component {
       fixedLegs: undefined,
       headIsFixed: true,
       torsoIsFixed: false,
-      legsIsFixed: false
+      legsIsFixed: false,
+      view: 'DrawCanvas'
     };
     this.componentSwitch = this.componentSwitch.bind(this);
     this.generateImage = this.generateImage.bind(this);
@@ -50,12 +51,14 @@ class App extends React.Component {
     e.preventDefault();
     var targetVal = e.target.innerText;
     if (targetVal === 'canvas') {
-      this.setState({currentView: <DrawCanvas
-        generateImage={this.generateImage.bind(this)}
-        fixHead={this.fixHead.bind(this)}
-        fixTorso={this.fixTorso.bind(this)}
-        fixLegs={this.fixLegs.bind(this)}
-        />}, ()=>{this.unfixAll()});
+      this.setState({
+        currentView: <DrawCanvas
+          generateImage={this.generateImage.bind(this)}
+          fixHead={this.fixHead.bind(this)}
+          fixTorso={this.fixTorso.bind(this)}
+          fixLegs={this.fixLegs.bind(this)}/>,
+        view: 'DrawCanvas'
+        }, ()=>{this.unfixAll()});
     } else if (targetVal === 'gallery') {
       this.fetchGallery();
     }
@@ -63,7 +66,10 @@ class App extends React.Component {
 
   fetchGallery(artist = this.state.login) {
     fetch(`/gallery?username=${artist}`).then(res => res.json())
-      .then(galleryImages => this.setState({currentView: <Gallery galleryOwner={artist} pics={galleryImages} fetchGallery={this.fetchGallery.bind(this)}/>}));
+      .then(galleryImages => this.setState({
+        currentView: <Gallery galleryOwner={artist} pics={galleryImages} fetchGallery={this.fetchGallery.bind(this)}/>,
+        view: 'Gallery'
+      }));
   }
 
   generateImage(userImage) {
@@ -91,7 +97,8 @@ class App extends React.Component {
           legsIsFixed={this.state.legsIsFixed}
           userPartIsFixed={this.userPartIsFixed.bind(this)}
           />,
-          userPart: userPart
+          userPart: userPart,
+          view: 'Composite'
       }, ()=>{this.setFixedPart(userPart, generatedImage[userPart])});
     });
   } else {
@@ -119,7 +126,8 @@ class App extends React.Component {
         torsoIsFixed={this.state.torsoIsFixed}
         legsIsFixed={this.state.legsIsFixed}
         userPartIsFixed={this.userPartIsFixed.bind(this)}
-        />
+        />,
+        view: 'Composite'
     });
   });
   }
@@ -250,9 +258,7 @@ class App extends React.Component {
           <MediaQuery orientation='landscape'>
             <ExquisiteWriter />
             <div className="foreground">
-              {this.state.currentView.type.name === 'Gallery' && 
-                <a href="#" onClick={this.componentSwitch}>gallery</a>
-              } 
+              {console.log(this.state.view)} 
               {this.state.currentView}     
             </div> 
           </MediaQuery>
