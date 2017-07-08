@@ -263,7 +263,7 @@ class App extends React.Component {
               )}
               {this.state.currentView}
               {this.state.view === 'DrawCanvas' && (
-                <a href="#" onClick={this.componentSwitch}>gallery</a>
+                <a href="#" className="mobile-gallery-link" onClick={this.componentSwitch}>gallery</a>
               )}     
             </div> 
           </MediaQuery>
