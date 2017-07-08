@@ -6,6 +6,9 @@ const difference = require('underscore').difference;
 var fs = require('fs');
 var crypto = require('crypto');
 
+// converts png files to icon files
+var pngToIco = require('png-to-ico');
+
 var session = require('express-session');
 var app = express();
 var port = process.env.PORT || 3000;
@@ -28,7 +31,6 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
-
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   successRedirect: '/profile',
@@ -53,6 +55,16 @@ function isLoggedIn(req, res, next) {
   res.redirect('/');
 }
 
+var testConversion = function(){
+  console.log(__dirname);
+  pngToIco('server/favicon.png')
+    .then(buf => {
+      fs.writeFileSync('server/favicon.ico', buf);
+    })
+    .catch(console.error);
+}
+// call on client request
+// testConversion();
 
 var generateFilename = (fileData) => {
   var hash = crypto.createHash('sha256');
