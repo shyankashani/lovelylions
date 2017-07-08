@@ -27,6 +27,11 @@ body {
     background-size: 400px 400px;
 }
 
+.mobile-gallery-link {
+    margin: -60px 30px;
+    position: absolute;
+}
+
 .mobile-login {
     font-size: 60px;
 }
