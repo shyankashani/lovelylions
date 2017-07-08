@@ -58,6 +58,9 @@ class App extends React.Component {
     var test = canvas.toDataURL('image/png', 1.0);
     link.href = test;
     document.getElementsByTagName('head')[0].appendChild(link);
+
+  componentDidUpdate() {
+    ReactDOM.findDOMNode(this).scrollTop = 0;
   }
 
   componentSwitch(e) {
@@ -246,15 +249,10 @@ class App extends React.Component {
           <MediaQuery orientation='portrait'>
             <ExquisiteWriter />
             <div className='portrait'></div>
-          </MediaQuery>
-          <MediaQuery orientation='landscape'>
-            <ExquisiteWriter />
             <div className="foreground">
-              {this.state.currentView}
-              <div className="nav-bar-mobile">
-              <a href="#" onClick={this.componentSwitch}>canvas</a>
+              <h1>cadavre exquis</h1>
               {this.state.login ? (
-                <span>
+                <span className="mobile-login">
                   <a href="#" onClick={this.componentSwitch}>gallery</a>
                   <a className="user-button" href="/logout">
                     <span className="login">{this.state.login.toLowerCase()}</span>
@@ -262,10 +260,15 @@ class App extends React.Component {
                   </a>
                 </span>
               ) : (
-                <a href="/auth/facebook" >login</a>
-              )}
-            </div>
-            </div>
+                <a className="mobile-login" href="/auth/facebook" >login</a>
+              )}       
+          </div>
+          </MediaQuery>
+          <MediaQuery orientation='landscape'>
+            <ExquisiteWriter />
+            <div className="foreground">
+              {this.state.currentView}     
+            </div> 
           </MediaQuery>
         </MediaQuery>
       </div>
