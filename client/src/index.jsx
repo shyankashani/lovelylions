@@ -244,7 +244,6 @@ class App extends React.Component {
               <h1>cadavre exquis</h1>
               {this.state.login ? (
                 <span className="mobile-login">
-                  <a href="#" onClick={this.componentSwitch}>gallery</a>
                   <a className="user-button" href="/logout">
                     <span className="login">{this.state.login.toLowerCase()}</span>
                     <span className="logout"></span>
@@ -262,7 +261,10 @@ class App extends React.Component {
               {this.state.view === 'Gallery' || this.state.view === 'Composite' && (
                 <a href="#" onClick={this.componentSwitch}>canvas</a>
               )}
-              {this.state.currentView}     
+              {this.state.currentView}
+              {this.state.view === 'DrawCanvas' && (
+                <a href="#" onClick={this.componentSwitch}>gallery</a>
+              )}     
             </div> 
           </MediaQuery>
         </MediaQuery>
