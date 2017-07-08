@@ -258,7 +258,10 @@ class App extends React.Component {
           <MediaQuery orientation='landscape'>
             <ExquisiteWriter />
             <div className="foreground">
-              {console.log(this.state.view)} 
+              {console.log(this.state.view)}
+              {this.state.view === 'Gallery' || this.state.view === 'Composite' && (
+                <a href="#" onClick={this.componentSwitch}>canvas</a>
+              )}
               {this.state.currentView}     
             </div> 
           </MediaQuery>
